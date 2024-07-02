@@ -1,0 +1,20 @@
+{
+  "name": "node-server",
+  "version": "1.0.0",
+  "description": "处理前端大文件上传",
+  "main": "index.js",
+  "scripts": {
+    "dev:v2": "nodemon v2-file-upload.js",
+    "dev:v3": "nodemon v3-file-upload.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "fs-extra": "^11.2.0",
+    "multiparty": "^4.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
