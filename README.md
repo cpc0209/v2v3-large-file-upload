@@ -8,7 +8,11 @@ vue3 + vite + axios
 
 # 使用说明
 
-文件刚拉取下来的,直接双击 npmAllInstall.bat 文件一次性安装vue2 + vue3 + 后端所需依赖
-前端项目:v2-upload, 后端项目:server
-两个项目的启动命令都是 npm run dev
-node >= 14
+1.文件刚拉取下来的,直接双击 npmInstallAll.bat 文件一次性安装vue2 + vue3 + 后端所需依赖
+
+2.前端项目:v2-file-upload 跟 v3-file-upload, 后端项目:node-server
+
+3.两个项目的启动命令都是 npm run dev
+
+
+4.node >= 14
