@@ -1,59 +1,61 @@
 <template>
-  <div v-for="item in props.uploadFileList" :key="item.id">
-    <div class="list_item">
-      <div class="left_box">
-        <p class="left_box_fileName">
-          {{ item.fileName }}
-        </p>
-        <!-- 单个文件进度条 -->
-        <div class="left_box_percentage">
-          <div class="percentage_bac">
-            <div
-              class="percentage_box"
-              :style="{ width: `${item.percentage}%` }"></div>
-            <div class="percentage_box_span">
-              <span>{{ Math.floor(item.percentage) }}%</span>
-            </div>
-          </div>
-          <div class="bottom_hint">
-            <div>
-              <p>{{ fileSize(item.fileSize) }}</p>
-            </div>
-            <div style="margin-left: 4px">
+  <div>
+    <div v-for="item in props.uploadFileList" :key="item.id">
+      <div class="list_item">
+        <div class="left_box">
+          <p class="left_box_fileName">
+            {{ item.fileName }}
+          </p>
+          <!-- 单个文件进度条 -->
+          <div class="left_box_percentage">
+            <div class="percentage_bac">
               <div
-                v-if="item.state === 0"
-                style="height: 24px; width: 100%"></div>
-              <p v-else-if="item.state === 1">正在解析中...</p>
-              <p v-else-if="item.state === 2">正在上传中...</p>
-              <p v-else-if="item.state === 3">暂停中</p>
-              <p v-else-if="item.state === 4">上传完成</p>
-              <p v-else-if="item.state === 5">上传中断</p>
-              <p v-else-if="item.state === 6">上传失败</p>
+                class="percentage_box"
+                :style="{ width: `${item.percentage}%` }"></div>
+              <div class="percentage_box_span">
+                <span>{{ Math.floor(item.percentage) }}%</span>
+              </div>
+            </div>
+            <div class="bottom_hint">
+              <div>
+                <p>{{ fileSize(item.fileSize) }}</p>
+              </div>
+              <div style="margin-left: 4px">
+                <div
+                  v-if="item.state === 0"
+                  style="height: 24px; width: 100%"></div>
+                <p v-else-if="item.state === 1">正在解析中...</p>
+                <p v-else-if="item.state === 2">正在上传中...</p>
+                <p v-else-if="item.state === 3">暂停中</p>
+                <p v-else-if="item.state === 4">上传完成</p>
+                <p v-else-if="item.state === 5">上传中断</p>
+                <p v-else-if="item.state === 6">上传失败</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- 右侧按钮 -->
-      <div class="rightBtn">
-        <!-- 必须解析完才能暂停，不然是没有接口取消调用的 -->
-        <div
-          class="my_btn redBtn"
-          @click="pauseUpload(item)"
-          v-if="[2].includes(item.state)">
-          暂停
+        <!-- 右侧按钮 -->
+        <div class="rightBtn">
+          <!-- 必须解析完才能暂停，不然是没有接口取消调用的 -->
+          <div
+            class="my_btn redBtn"
+            @click="pauseUpload(item)"
+            v-if="[2].includes(item.state)">
+            暂停
+          </div>
+          <!-- 暂停中显示的继续按钮 -->
+          <div
+            class="my_btn blueBtn"
+            @click="resumeUpload(item)"
+            v-if="[3, 5].includes(item.state)">
+            继续
+          </div>
+          <div class="my_btn redBtn" @click="cancelSingle(item)">取消</div>
         </div>
-        <!-- 暂停中显示的继续按钮 -->
-        <div
-          class="my_btn blueBtn"
-          @click="resumeUpload(item)"
-          v-if="[3, 5].includes(item.state)">
-          继续
-        </div>
-        <div class="my_btn redBtn" @click="cancelSingle(item)">取消</div>
       </div>
     </div>
+    <div style="height: 108px"></div>
   </div>
-  <div style="height: 108px"></div>
 </template>
 
 <script setup>

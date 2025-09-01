@@ -66,3 +66,17 @@ export function checkFile(data) {
   })
 }
 
+/**
+ * [uploadFolder] - 上传文件夹
+ * @param formData 包含文件夹内容的 FormData 对象
+ * @param onProgress 上传进度回调函数
+ */
+export function uploadFolder(formData, onProgress) {
+  return service({
+    url: '/folder-upload',
+    method: 'post',
+    data: formData,
+    onUploadProgress: onProgress,
+  })
+}
+
